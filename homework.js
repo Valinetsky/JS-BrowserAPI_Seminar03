@@ -233,41 +233,34 @@ dotListener();
 
 const fetchPhotos = async () => {
     try {
-        const url = `https://api.unsplash.com/photos/random?client_id=${CLIENT_ID}&count=4&query=food`;
+        const url = `https://api.unsplash.com/photos/random?client_id=${CLIENT_ID}&count=${maxElement}`;
         const response = await fetch(url);
         const data = await response.json();
 
         if (response.ok && data.length) {
-            state = data;
-            currentSlide = data[0].id;
-            setPhotos();
+            // Это было в оригинале
+            // state = data;
+            // currentSlide = data[0].id;
+            // setPhotos();
+            photoDataArray = data;
         }
     } catch (err) {
         console.log(err);
     }
 };
 
-const photoData = [
-    {
-        name: "Photographer",
-        avatarUrl: "Mist",
-    },
-];
-
-localStorage.setItem("photoData", JSON.stringify(photoData));
-
 function readData() {
-    const dataJSON = localStorage.getItem("photoData");
+    const dataJSON = localStorage.getItem("weekSlider");
 
     if (dataJSON === null) {
         return undefined;
     }
 
-    // Если вдруг в хранилище оказался невалидный JSON предохраняемся от этого
+    // Если вдруг в хранилище оказался невалидный JSON затираем его
     try {
         return JSON.parse(dataJSON);
     } catch (e) {
-        localStorage.removeItem("photoData");
+        localStorage.removeItem("weekSlider");
         return undefined;
     }
 }
@@ -289,3 +282,84 @@ function getWeekDay(date) {
 }
 
 console.log(`Сегодня ${getWeekDay(currentDate)}`);
+
+// const WEEK = 604800000; // Столько стоит неделя в микросекундах
+// const now = new Date();
+// const initDay = new Date(now.getTime() - now.getDay() * 24 * 3600 * 1000);
+// initDay.setHours(0, 0, 0, 0);
+// console.log(`Воскресенье ${initDay}`);
+
+// const currentDay = now;
+// console.log(currentDate);
+
+// if (currentDate - initDay > WEEK) {
+//     console.log("Прошла неделя");
+// }
+// console.log(currentDate - initDay);
+
+if (readData()) {
+    // if () {
+    // }
+}
+function getInitDay() {
+    const now = new Date();
+    const initDay = new Date(now.getTime() - now.getDay() * 24 * 3600 * 1000);
+    initDay.setHours(0, 0, 0, 0);
+    return initDay;
+}
+
+const initDay = getInitDay();
+
+function needToReload(params) {
+    const WEEK = 604800000; // Столько стоит неделя в микросекундах
+    const now = new Date();
+    const initDay = new Date(now.getTime() - now.getDay() * 24 * 3600 * 1000);
+    initDay.setHours(0, 0, 0, 0);
+    console.log(`Воскресенье ${initDay}`);
+
+    const currentDay = now;
+    console.log(currentDate);
+}
+
+console.log(initDay);
+
+localStorage.setItem("weekSlider", JSON.stringify(weekSlider));
+
+console.log(localStorage.getItem("weekSlider"));
+
+console.log(readData());
+const photoDataArray = [];
+function createLocalstorage() {
+    const weekSlider = {};
+    weekSlider.initDay = getInitDay();
+    weekSlider.photoDataArray = photoDataArray;
+    console.log(weekSlider);
+    console.log(weekSlider.initDay.getDay());
+    console.log(weekSlider.photoDataArray[0].like);
+}
+
+function getInitDay() {
+    const now = new Date();
+    const initDay = new Date(now.getTime() - now.getDay() * 24 * 3600 * 1000);
+    initDay.setHours(0, 0, 0, 0);
+    return initDay;
+}
+console.log(getInitDay());
+
+// const photoDataArray = [
+//     {
+//         name: "Photographer",
+//         avatarUrl: "Mist",
+//         like: 1,
+//     },
+//     {
+//         name: "Photographer",
+//         avatarUrl: "Mist",
+//         like: 2,
+//     },
+//     {
+//         name: "Photographer",
+//         avatarUrl: "Mist",
+//         like: 3,
+//     },
+// ];

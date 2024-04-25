@@ -148,7 +148,6 @@ body:before {
   position: absolute;
   top: 50%;
   -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
           transform: translateY(-50%);
   width: 100%;
   display: -webkit-box;
@@ -197,7 +196,6 @@ body:before {
 .dot:hover {
   background: rgba(255, 255, 255, 0.5);
   -webkit-transform: scale(1.2);
-      -ms-transform: scale(1.2);
           transform: scale(1.2);
 }
 .dot_middle {
