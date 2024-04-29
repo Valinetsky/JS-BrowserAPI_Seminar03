@@ -14,7 +14,7 @@ const middleDot = parseInt(maxElement / 2);
 
 console.log(`currentDate.getDay()`, currentDate.getDay());
 // activeFrame
-let activeFrame = currentDate.getDay();
+let activeFrame = 0;
 
 const dotsFrame = document.querySelector(".slider__dots");
 
@@ -30,8 +30,9 @@ const dot = (position) => {
 };
 
 // Modulo: maximum + 1 = minimum; minimum - 1 = maximum
-const frameModulo = (direction) =>
-    (((activeFrame + direction) % maxElement) + maxElement) % maxElement;
+function frameModulo(direction) {
+    return (((activeFrame + direction) % maxElement) + maxElement) % maxElement;
+}
 
 // Append images names to array, and dot elements to dotsFrame
 const arrayDotsGenerate = () => {
@@ -101,9 +102,9 @@ function setInnerHTML(currentFrame) {
 
 // initSlider
 const initSlider = (number) => {
-    slider.append(getFrame(number));
-    slider.append(getFrame(number + 1));
-    slider.prepend(getFrame(number - 1));
+    slider.append(getFrame(frameModulo(number)));
+    slider.append(getFrame(frameModulo(number + 1)));
+    slider.prepend(getFrame(frameModulo(number - 1)));
 };
 
 // animate frame on edge of slider
