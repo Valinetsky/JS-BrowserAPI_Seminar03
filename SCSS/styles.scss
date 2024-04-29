@@ -7,8 +7,8 @@
 body {
     /* background: rgba(205, 214, 219, 0.3);
 	background-image: url(/img/logo.svg) center no-reapeat; */
-    background: url(/img/logo_transparent.svg) top 15vw center/ 40vw no-repeat,
-        linear-gradient(320deg, #f27121, #e94057, #8a2387);
+    // background: url(/img/logo_transparent.svg) top 15vw center/ 40vw no-repeat,
+    // linear-gradient(320deg, #f27121, #e94057, #8a2387);
     font-family: "Roboto", sans-serif;
     overflow: hidden;
 }
@@ -130,6 +130,23 @@ body {
     background: url(../img/1.jpg) center/cover no-repeat;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
     margin: 1vw;
+    padding: 2vw;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: space-between;
+    // vertical-align: bottom;
+    font-size: 2rem;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0px 0px 5px black;
+    &__day {
+        font-size: 1rem;
+    }
+    & span {
+        font-weight: 100;
+        font-size: 0.5rem;
+    }
 }
 .dot {
     height: 1vw;

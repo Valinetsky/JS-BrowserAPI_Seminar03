@@ -8,14 +8,13 @@ const animationDelay = 500;
 const maxElement = 7;
 // Center dot
 const middleDot = parseInt(maxElement / 2);
-// Images names array
-const images = [];
-// activeFrame
-let activeFrame = 0;
-// текущая дата
-let currentDate = new Date();
 
-console.log(currentDate.getDay());
+// // Images names array
+// const images = [];
+
+console.log(`currentDate.getDay()`, currentDate.getDay());
+// activeFrame
+let activeFrame = currentDate.getDay();
 
 const dotsFrame = document.querySelector(".slider__dots");
 
@@ -29,30 +28,30 @@ const dot = (position) => {
     }
     return element;
 };
+
 // Modulo: maximum + 1 = minimum; minimum - 1 = maximum
 const frameModulo = (direction) =>
     (((activeFrame + direction) % maxElement) + maxElement) % maxElement;
 
 // Append images names to array, and dot elements to dotsFrame
-const arrayAndDotsGenerate = () => {
+const arrayDotsGenerate = () => {
     for (let index = 0; index < maxElement; index++) {
-        images.push(`${index + 1}.jpg`);
         dotsFrame.appendChild(dot(index));
     }
 };
 
-arrayAndDotsGenerate();
+arrayDotsGenerate();
 
-// Shift array to current day of the week
-function arrShift(arr, steps) {
-    for (let index = 0; index < steps; index++) {
-        arr.unshift(arr.pop());
-    }
-}
-console.log(images);
+// // Shift array to current day of the week
+// function arrShift(arr, steps) {
+//     for (let index = 0; index < steps; index++) {
+//         arr.unshift(arr.pop());
+//     }
+// }
+// console.log(images);
 
-arrShift(images, currentDate.getDay());
-console.log(images);
+// arrShift(images, currentDate.getDay());
+// console.log(images);
 
 // Images in slider
 const frames = 3;
@@ -70,21 +69,41 @@ const controls = document.querySelector(".carousel");
 const getFrame = (direction) => {
     const currentFrame = frameModulo(direction);
     console.log(currentFrame);
+    console.log(images[currentFrame].url);
     const sliderFrame = document.createElement("div");
     sliderFrame.className = "slider__frame";
     const imageFrame = document.createElement("div");
-    const backgroundImageString = `url(./img/${images[currentFrame]}) center/cover no-repeat`;
+    const backgroundImageString = `url(${images[currentFrame].url}) center/cover no-repeat`;
     imageFrame.className = "frame";
     imageFrame.style.background = backgroundImageString;
+
+    imageFrame.innerHTML = setInnerHTML(currentFrame);
+
     sliderFrame.appendChild(imageFrame);
     return sliderFrame;
 };
 
+function setInnerHTML(currentFrame) {
+    let innerString = "";
+    let todayString =
+        currentDate.getDay() === currentFrame
+            ? `Привет, сегодня ${getWeekDay(currentDate)}`
+            : "";
+    innerString += `
+    <div class="frame__day">
+        ${todayString}
+    </div>
+    <div class="frame__author">
+        <span>Photographer: </span> ${images[currentFrame].user}
+    </div>`;
+    return innerString;
+}
+
 // initSlider
-const initSlider = () => {
-    slider.append(getFrame(0));
-    slider.append(getFrame(1));
-    slider.prepend(getFrame(-1));
+const initSlider = (number) => {
+    slider.append(getFrame(number));
+    slider.append(getFrame(number + 1));
+    slider.prepend(getFrame(number - 1));
 };
 
 // animate frame on edge of slider
@@ -228,64 +247,41 @@ function dotListener() {
     controls.addEventListener("click", controlClick);
 }
 
-initSlider();
+console.log(activeFrame);
+initSlider(activeFrame);
 dotListener();
 
-const fetchPhotos = async () => {
-    try {
-        const url = `https://api.unsplash.com/photos/random?client_id=${CLIENT_ID}&count=4&query=food`;
-        const response = await fetch(url);
-        const data = await response.json();
+// fetch
+// const fetchPhotos = async () => {
+//     try {
+//         const url = `https://api.unsplash.com/photos/random?client_id=${CLIENT_ID}&count=4&query=food`;
+//         const response = await fetch(url);
+//         const data = await response.json();
 
-        if (response.ok && data.length) {
-            state = data;
-            currentSlide = data[0].id;
-            setPhotos();
-        }
-    } catch (err) {
-        console.log(err);
-    }
-};
+//         if (response.ok && data.length) {
+//             state = data;
+//             currentSlide = data[0].id;
+//             setPhotos();
+//         }
+//     } catch (err) {
+//         console.log(err);
+//     }
+// };
 
-const photoData = [
-    {
-        name: "Photographer",
-        avatarUrl: "Mist",
-    },
-];
+// function readData() {
+//     const dataJSON = localStorage.getItem("photoData");
 
-localStorage.setItem("photoData", JSON.stringify(photoData));
+//     if (dataJSON === null) {
+//         return undefined;
+//     }
 
-function readData() {
-    const dataJSON = localStorage.getItem("photoData");
-
-    if (dataJSON === null) {
-        return undefined;
-    }
-
-    // Если вдруг в хранилище оказался невалидный JSON предохраняемся от этого
-    try {
-        return JSON.parse(dataJSON);
-    } catch (e) {
-        localStorage.removeItem("photoData");
-        return undefined;
-    }
-}
+//     // Если вдруг в хранилище оказался невалидный JSON предохраняемся от этого
+//     try {
+//         return JSON.parse(dataJSON);
+//     } catch (e) {
+//         localStorage.removeItem("photoData");
+//         return undefined;
+//     }
+// }
 
 console.log(readData());
-
-function getWeekDay(date) {
-    let days = [
-        "Воскресенье",
-        "Понедельник",
-        "Вторник",
-        "Среда",
-        "Четверг",
-        "Пятница",
-        "Суббота",
-    ];
-
-    return days[date.getDay()];
-}
-
-console.log(`Сегодня ${getWeekDay(currentDate)}`);

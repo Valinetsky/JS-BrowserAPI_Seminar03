@@ -8,7 +8,6 @@
 body {
   /* background: rgba(205, 214, 219, 0.3);
   background-image: url(/img/logo.svg) center no-reapeat; */
-  background: url(/img/logo_transparent.svg) top 15vw center/40vw no-repeat, linear-gradient(320deg, #f27121, #e94057, #8a2387);
   font-family: "Roboto", sans-serif;
   overflow: hidden;
 }
@@ -180,6 +179,29 @@ body:before {
   -webkit-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
           box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
   margin: 1vw;
+  padding: 2vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 2rem;
+  font-weight: 900;
+  color: white;
+  text-shadow: 0px 0px 5px black;
+}
+.frame__day {
+  font-size: 1rem;
+}
+.frame span {
+  font-weight: 100;
+  font-size: 0.5rem;
 }
 
 .dot {
