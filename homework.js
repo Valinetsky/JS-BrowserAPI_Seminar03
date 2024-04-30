@@ -242,38 +242,3 @@ function dotListener() {
 
 initSlider();
 dotListener();
-
-// fetch
-// const fetchPhotos = async () => {
-//     try {
-//         const url = `https://api.unsplash.com/photos/random?client_id=${CLIENT_ID}&count=4&query=food`;
-//         const response = await fetch(url);
-//         const data = await response.json();
-
-//         if (response.ok && data.length) {
-//             state = data;
-//             currentSlide = data[0].id;
-//             setPhotos();
-//         }
-//     } catch (err) {
-//         console.log(err);
-//     }
-// };
-
-// function readData() {
-//     const dataJSON = localStorage.getItem("photoData");
-
-//     if (dataJSON === null) {
-//         return undefined;
-//     }
-
-//     // Если вдруг в хранилище оказался невалидный JSON предохраняемся от этого
-//     try {
-//         return JSON.parse(dataJSON);
-//     } catch (e) {
-//         localStorage.removeItem("photoData");
-//         return undefined;
-//     }
-// }
-
-// console.log(readData());
