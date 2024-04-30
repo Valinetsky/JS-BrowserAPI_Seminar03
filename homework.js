@@ -4,15 +4,10 @@
 const timeStep = 1000;
 // animationDelay
 const animationDelay = 500;
-// Slides quantity
-const maxElement = 7;
+
 // Center dot
 const middleDot = parseInt(maxElement / 2);
 
-// // Images names array
-// const images = [];
-
-console.log(`currentDate.getDay()`, currentDate.getDay());
 // activeFrame
 let activeFrame = 0;
 
@@ -43,17 +38,6 @@ const arrayDotsGenerate = () => {
 
 arrayDotsGenerate();
 
-// // Shift array to current day of the week
-// function arrShift(arr, steps) {
-//     for (let index = 0; index < steps; index++) {
-//         arr.unshift(arr.pop());
-//     }
-// }
-// console.log(images);
-
-// arrShift(images, currentDate.getDay());
-// console.log(images);
-
 // Images in slider
 const frames = 3;
 
@@ -69,17 +53,13 @@ const controls = document.querySelector(".carousel");
 // Create and place frame to slider
 const getFrame = (direction) => {
     const currentFrame = frameModulo(direction);
-    console.log(currentFrame);
-    console.log(images[currentFrame].url);
     const sliderFrame = document.createElement("div");
     sliderFrame.className = "slider__frame";
     const imageFrame = document.createElement("div");
     const backgroundImageString = `url(${images[currentFrame].url}) center/cover no-repeat`;
     imageFrame.className = "frame";
     imageFrame.style.background = backgroundImageString;
-
     imageFrame.innerHTML = setInnerHTML(currentFrame);
-
     sliderFrame.appendChild(imageFrame);
     return sliderFrame;
 };
@@ -88,23 +68,32 @@ function setInnerHTML(currentFrame) {
     let innerString = "";
     let todayString =
         currentDate.getDay() === currentFrame
-            ? `Привет, сегодня ${getWeekDay(currentDate)}`
-            : "";
+            ? `Привет, сегодня ${getWeekDayWord(currentDate).toLowerCase()}`
+            : `${getWeekDay(currentFrame)}`;
     innerString += `
     <div class="frame__day">
         ${todayString}
     </div>
-    <div class="frame__author">
-        <span>Photographer: </span> ${images[currentFrame].user}
-    </div>`;
+    <div class="frame__info">
+        <div class="frame__author">
+            <span>Photographer: </span> ${images[currentFrame].user}
+        </div>
+        <div class="frame__like">
+            &#10084;${images[currentFrame].localLike}
+        </div>
+    </div>
+    `;
     return innerString;
 }
 
 // initSlider
-const initSlider = (number) => {
-    slider.append(getFrame(frameModulo(number)));
-    slider.append(getFrame(frameModulo(number + 1)));
-    slider.prepend(getFrame(frameModulo(number - 1)));
+const initSlider = () => {
+    // Generating initial slides
+    slider.append(getFrame(frameModulo(currentDate.getDay())));
+    slider.append(getFrame(frameModulo(currentDate.getDay() + 1)));
+    slider.prepend(getFrame(frameModulo(currentDate.getDay() - 1)));
+    // Set activeFrame to currentDate to correct date shift
+    activeFrame = currentDate.getDay();
 };
 
 // animate frame on edge of slider
@@ -204,6 +193,9 @@ function controlClick(event) {
 }
 
 function frameMove(dotsSteps, direction, currentDot) {
+    if (direction === undefined) {
+        return;
+    }
     // Animation parameters
     const dotsTransform = [
         { transform: "scale(1.5)", background: "white" },
@@ -248,8 +240,7 @@ function dotListener() {
     controls.addEventListener("click", controlClick);
 }
 
-console.log(activeFrame);
-initSlider(activeFrame);
+initSlider();
 dotListener();
 
 // fetch
@@ -285,4 +276,4 @@ dotListener();
 //     }
 // }
 
-console.log(readData());
+// console.log(readData());
