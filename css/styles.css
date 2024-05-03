@@ -1,6 +1,5 @@
 * {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
@@ -14,8 +13,7 @@ body {
 
 /* Background animation */
 body {
-  -webkit-animation: theme 21s linear infinite;
-          animation: theme 21s linear infinite;
+  animation: theme 21s linear infinite;
 }
 body:after, body:before {
   content: "";
@@ -28,41 +26,15 @@ body:after, body:before {
   width: 100vmax;
   height: 100vmax;
   background: rgba(0, 0, 0, 0.05);
-  -webkit-animation: background 90s linear infinite;
-          animation: background 90s linear infinite;
+  animation: background 90s linear infinite;
 }
 body:after {
   left: 15vw;
 }
 body:before {
   right: 15vw;
-  -webkit-animation-delay: -30s;
-          animation-delay: -30s;
+  animation-delay: -30s;
   animation-direction: reverse;
-}
-
-@-webkit-keyframes theme {
-  0% {
-    background: #74c390;
-  }
-  16% {
-    background: #5dbdb6;
-  }
-  33% {
-    background: #59d4e1;
-  }
-  50% {
-    background: #51bce8;
-  }
-  66% {
-    background: #fa5374;
-  }
-  83% {
-    background: #e46653;
-  }
-  100% {
-    background: #74c390;
-  }
 }
 
 @keyframes theme {
@@ -88,24 +60,12 @@ body:before {
     background: #74c390;
   }
 }
-@-webkit-keyframes background {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
 @keyframes background {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 /*  */
@@ -114,31 +74,19 @@ body:before {
   height: 80vh;
   margin: 0 auto;
   margin-top: 10vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .slider {
   width: 300%;
   height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 .slider__frame {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-negative: 0;
-      flex-shrink: 0;
+  flex-shrink: 0;
   height: 100%;
   width: 33.3333333%;
 }
@@ -146,28 +94,17 @@ body:before {
   padding: 0 1vw;
   position: absolute;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
 }
 .slider__dots {
   margin: 2vw;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   gap: 1vw;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
 }
 
 .frame {
@@ -176,21 +113,13 @@ body:before {
   background: #4676d7;
   border-radius: 2vw;
   background: url(../img/1.jpg) center/cover no-repeat;
-  -webkit-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
-          box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
   margin: 1vw;
   padding: 2vw;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-between;
   font-size: 2vw;
   font-weight: 900;
   color: white;
@@ -204,23 +133,15 @@ body:before {
   font-size: 1vw;
 }
 .frame__info {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -ms-flex-line-pack: baseline;
-      align-content: baseline;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  justify-content: space-between;
+  align-content: baseline;
+  align-items: flex-end;
   opacity: 0.33;
   /* From https://css.glass */
   background: rgba(255, 255, 255, 0.15);
   border-radius: 16px;
-  -webkit-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   -webkit-backdrop-filter: blur(4px);
           backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -228,7 +149,6 @@ body:before {
 }
 .frame__info:hover {
   opacity: 1;
-  -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
 .frame__like {
@@ -240,8 +160,7 @@ body:before {
   width: 1vw;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.2);
-  -webkit-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -249,9 +168,7 @@ body:before {
 }
 .dot:hover {
   background: rgba(255, 255, 255, 0.5);
-  -webkit-transform: scale(1.2);
-      -ms-transform: scale(1.2);
-          transform: scale(1.2);
+  transform: scale(1.2);
 }
 .dot_middle {
   cursor: default;
@@ -262,25 +179,12 @@ body:before {
   pointer-events: none;
 }
 
-@-webkit-keyframes dots {
-  0% {
-    -webkit-transform: scale(1.5);
-            transform: scale(1.5);
-  }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-}
-
 @keyframes dots {
   0% {
-    -webkit-transform: scale(1.5);
-            transform: scale(1.5);
+    transform: scale(1.5);
   }
   100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
   }
 }
 .btn {
@@ -305,6 +209,5 @@ body:before {
 }
 .btn:focus {
   outline: none;
-  -webkit-box-shadow: 0 0 0 1px #cbd6ee;
-          box-shadow: 0 0 0 1px #cbd6ee;
-}
+  box-shadow: 0 0 0 1px #cbd6ee;
+}/*# sourceMappingURL=styles.css.map */

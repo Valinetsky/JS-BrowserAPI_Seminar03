@@ -7,7 +7,6 @@
 body {
   /* background: rgba(205, 214, 219, 0.3);
   background-image: url(/img/logo.svg) center no-reapeat; */
-  background: url(/img/logo_transparent.svg) top 15vw center/40vw no-repeat, linear-gradient(320deg, #f27121, #e94057, #8a2387);
   font-family: "Roboto", sans-serif;
   overflow: hidden;
 }
@@ -103,6 +102,7 @@ body:before {
 .slider__dots {
   margin: 2vw;
   display: flex;
+  flex-wrap: wrap;
   gap: 1vw;
   justify-content: center;
 }
@@ -115,6 +115,44 @@ body:before {
   background: url(../img/1.jpg) center/cover no-repeat;
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
   margin: 1vw;
+  padding: 2vw;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 2vw;
+  font-weight: 900;
+  color: white;
+  text-shadow: 0px 0px 5px black;
+}
+.frame__day {
+  font-size: 1vw;
+}
+.frame span {
+  font-weight: 100;
+  font-size: 1vw;
+}
+.frame__info {
+  display: flex;
+  justify-content: space-between;
+  align-content: baseline;
+  align-items: flex-end;
+  opacity: 0.33;
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.5vw 1vw;
+}
+.frame__info:hover {
+  opacity: 1;
+  transition: all 0.3s ease-out;
+}
+.frame__like {
+  cursor: pointer;
 }
 
 .dot {
@@ -156,15 +194,18 @@ body:before {
      -moz-appearance: none;
           appearance: none;
   border: 0;
-  border-radius: 5px;
+  border-radius: 1vw;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.75);
   background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  padding: 8px 16px;
-  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 8px 16px 10px;
+  font-size: 2rem;
   cursor: pointer;
 }
 .btn:hover {
   background: rgba(0, 0, 0, 0.75);
+  color: rgba(255, 255, 255, 0.8);
 }
 .btn:focus {
   outline: none;

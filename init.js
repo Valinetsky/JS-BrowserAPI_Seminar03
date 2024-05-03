@@ -89,9 +89,10 @@ const fetchPhotos = async () => {
 if (readData() === undefined) {
     fetchPhotos();
 } else {
+    const weekMS = 604800000
     const dateCheck = new Date(JSON.parse(localStorage.getItem("startDate")));
-    console.log((currentDate - dateCheck) / 604800000);
-    if ((currentDate - dateCheck) / 604800000 >= 1) {
+    console.log((currentDate - dateCheck) / weekMS);
+    if ((currentDate - dateCheck) / weekMS >= 1) {
         console.log("Need to reload photos");
         fetchPhotos();
     } else {
