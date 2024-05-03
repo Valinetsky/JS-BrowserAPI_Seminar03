@@ -251,15 +251,13 @@ function dotListener() {
 }
 
 const likeCounterAdd = () => {
-  slider.childNodes[1]
-    .querySelector(".frame__like")
-    .addEventListener("click", likeClick);
+  const likeBox = slider.childNodes[1].querySelector(".frame__like");
+  likeBox.addEventListener("click", likeClick);
+  console.log(likeBox);
 };
 
 const likeCounterRemove = () => {
-  slider.childNodes[1]
-    .querySelectorAll(".frame__like")
-    .removeEventListener("click", likeClick);
+  likeBox.removeEventListener("click", likeClick);
 };
 
 const likeClick = (event) => {
