@@ -94,7 +94,7 @@ const initSlider = () => {
   slider.prepend(getFrame(frameModulo(currentDate.getDay() - 1)));
   // Set activeFrame to currentDate to correct date shift
   activeFrame = currentDate.getDay();
-  likeCounterAdd();
+  // likeCounterAdd();
   // console.log(likeBox);
 };
 
@@ -163,6 +163,12 @@ const dotsContainer = document.querySelector(".slider__dots");
 
 // Slide rotation
 function controlClick(event) {
+  if (event.target === slider.childNodes[1].querySelector(".frame__like")) {
+    console.log("CLICK Like");
+    likeClick(event);
+    return;
+  }
+  // likeCounterRemove();
   let dotsSteps = 1;
   let direction;
   let currentDot;
@@ -176,6 +182,7 @@ function controlClick(event) {
   }
 
   console.log(event.target);
+
   if (event.target.hasAttribute("data-pos")) {
     controls.removeEventListener("click", controlClick);
     currentDot = parseInt(event.target.getAttribute("data-pos"));
@@ -200,8 +207,8 @@ function frameMove(dotsSteps, direction, currentDot) {
   if (direction === undefined) {
     return;
   }
-  console.log("moving");
-  likeCounterRemove();
+  // console.log("moving");
+  // likeCounterRemove();
 
   // Animation parameters
   const dotsTransform = [
@@ -230,7 +237,7 @@ function frameMove(dotsSteps, direction, currentDot) {
 
   middleDotAnimation.onfinish = () => {
     dotListener();
-    likeCounterAdd();
+    // likeCounterAdd();
   };
 
   // Dots animation from click to middleDot
@@ -250,17 +257,24 @@ function dotListener() {
   controls.addEventListener("click", controlClick);
 }
 
-const likeCounterAdd = () => {
-  const likeBox = slider.childNodes[1].querySelector(".frame__like");
-  likeBox.addEventListener("click", likeClick);
-  console.log(likeBox);
-};
+// function likeCounterAdd() {
+//   const likeBox = slider.childNodes[1].querySelector(".frame__like");
+//   likeBox.classList.add("likeCenterFrame");
+//   console.log(likeBox);
+// }
 
-const likeCounterRemove = () => {
-  likeBox.removeEventListener("click", likeClick);
-};
+// function likeCounterRemove() {
+//   // likeBox.removeEventListener("click", likeClick);
+//   const likeBox = slider.querySelectorAll(".likeCenterFrame");
+//   console.log(likeBox);
+//   [].forEach.call(likeBox, function (el) {
+//     console.log("el", el.classList);
+//     el.classList.remove("likeCenterFrame");
+//     console.log("el", el);
+//   });
+// }
 
-const likeClick = (event) => {
+function likeClick(event) {
   console.log("LIKECLICK");
   console.log(event.target);
   console.log(activeFrame);
@@ -268,7 +282,7 @@ const likeClick = (event) => {
   console.log(images[activeFrame].localLike);
   images[activeFrame].localLike++;
   event.target.innerHTML = `&#10084;${images[activeFrame].localLike}`;
-};
+}
 
 initSlider();
 dotListener();
