@@ -2,6 +2,7 @@
 
 // Frame swap time
 const timeStep = 1000;
+
 // animationDelay
 const animationDelay = 500;
 
@@ -94,8 +95,6 @@ const initSlider = () => {
   slider.prepend(getFrame(frameModulo(currentDate.getDay() - 1)));
   // Set activeFrame to currentDate to correct date shift
   activeFrame = currentDate.getDay();
-  // likeCounterAdd();
-  // console.log(likeBox);
 };
 
 // animate frame on edge of slider
@@ -164,11 +163,9 @@ const dotsContainer = document.querySelector(".slider__dots");
 // Slide rotation
 function controlClick(event) {
   if (event.target === slider.childNodes[1].querySelector(".frame__like")) {
-    console.log("CLICK Like");
     likeClick(event);
     return;
   }
-  // likeCounterRemove();
   let dotsSteps = 1;
   let direction;
   let currentDot;
@@ -180,15 +177,10 @@ function controlClick(event) {
     direction = 1;
     currentDot = middleDot + 1;
   }
-
-  console.log(event.target);
-
   if (event.target.hasAttribute("data-pos")) {
     controls.removeEventListener("click", controlClick);
     currentDot = parseInt(event.target.getAttribute("data-pos"));
     dotsSteps = currentDot - middleDot;
-    console.log(`First dotsSteps = ${dotsSteps}`);
-
     if (dotsSteps !== 0) {
       if (dotsSteps < 0) {
         direction = -1;
@@ -198,17 +190,14 @@ function controlClick(event) {
       }
     }
   }
-  //   console.log(`dotsSteps = ${dotsSteps}`);
-  //   console.log(`direction = ${direction}`);
   frameMove(dotsSteps, direction, currentDot);
 }
 
+// Frame move
 function frameMove(dotsSteps, direction, currentDot) {
   if (direction === undefined) {
     return;
   }
-  // console.log("moving");
-  // likeCounterRemove();
 
   // Animation parameters
   const dotsTransform = [
@@ -253,35 +242,16 @@ function frameMove(dotsSteps, direction, currentDot) {
   }
 }
 
+// Add listener to carousel
 function dotListener() {
   controls.addEventListener("click", controlClick);
 }
 
-// function likeCounterAdd() {
-//   const likeBox = slider.childNodes[1].querySelector(".frame__like");
-//   likeBox.classList.add("likeCenterFrame");
-//   console.log(likeBox);
-// }
-
-// function likeCounterRemove() {
-//   // likeBox.removeEventListener("click", likeClick);
-//   const likeBox = slider.querySelectorAll(".likeCenterFrame");
-//   console.log(likeBox);
-//   [].forEach.call(likeBox, function (el) {
-//     console.log("el", el.classList);
-//     el.classList.remove("likeCenterFrame");
-//     console.log("el", el);
-//   });
-// }
-
+// Modify likes quantity, update screen, re-set localstorage
 function likeClick(event) {
-  console.log("LIKECLICK");
-  console.log(event.target);
-  console.log(activeFrame);
-  console.log(images[activeFrame].user);
-  console.log(images[activeFrame].localLike);
   images[activeFrame].localLike++;
   event.target.innerHTML = `&#10084;${images[activeFrame].localLike}`;
+  localStorage.setItem("photoData", JSON.stringify(images));
 }
 
 initSlider();
